@@ -72,6 +72,7 @@ The data will come from node.js REST web services you will write. The hypothetic
 The user will be able to log on and off, view the books she supports/sells, view and change her To Do list, and view existing Messages.  
 
 Requirements 
+
 1.Last assignment you made use of a lite implementation of Google Material. 
 In this assignment, I would like you to try using Angular Material (https://material.angularjs.org), 
 which is the reference implementation of Google's Material Design Specification.  
