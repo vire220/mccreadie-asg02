@@ -2,6 +2,7 @@ const PORT = 8080;
 
 var express = require("express");
 var mongoose = require('mongoose');
+var bodyParser = require("body-parser");
 var router = require("./app/routes");
 var database = require("./config/database");
 
@@ -11,6 +12,9 @@ app.use(function(req, res, next){
     console.log("Request to " + req.url);
     next();
 });
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use("/api", router);
 app.use(express.static('public'));
