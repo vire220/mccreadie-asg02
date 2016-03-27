@@ -1,4 +1,5 @@
 var mongoose = require('mongoose');
+var bcrypt = require("bcrypt-nodejs");
 
 var Todo = new mongoose.Schema({
     "id": Number,
@@ -66,7 +67,10 @@ var Employee = new mongoose.Schema({
     "books": [Book]
 });
 
-
+// checking if password is valid
+Employee.methods.validPassword = function(password) {
+    return bcrypt.compareSync(password, this.local.password);
+};
 
 module.exports.Employee = Employee;
 module.exports.Message = Message;
