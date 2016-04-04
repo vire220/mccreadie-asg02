@@ -1,12 +1,32 @@
 var mongoose = require('mongoose');
-var bcrypt = require("bcrypt-nodejs");
+
+var priorityStates = "low medium high".split(' ');
 
 var Todo = new mongoose.Schema({
-    "id": Number,
-    "status": String,
-    "priority": String,
-    "date": String,
-    "description": String
+    "id": {
+        type: Number,
+        trim: true,
+        unique: true,
+        required: true
+    },
+    "status": {
+        type: String,
+        required: true
+    },
+    "priority": {
+        type: String,
+        required: true,
+        enum: priorityStates
+    },
+    "date": {
+        type: String,
+        required: true,
+        match: /^((0?[1-9]|1[012])[/](0?[1-9]|[12][0-9]|3[01])[/](19|20)?[0-9]{2})*$/
+    },
+    "description": {
+        type: String,
+        required: true
+    }
 });
 
 var Book = new mongoose.Schema({
@@ -18,16 +38,16 @@ var Book = new mongoose.Schema({
 });
 
 var University = new mongoose.Schema({
-        "id": Number,
-        "name": String,
-        "address": String,
-        "city": String,
-        "state": String,
-        "zip": String,
-        "website": String,
-        "latitude": Number,
-        "longitude": Number
-    });
+    "id": Number,
+    "name": String,
+    "address": String,
+    "city": String,
+    "state": String,
+    "zip": String,
+    "website": String,
+    "latitude": Number,
+    "longitude": Number
+});
 
 var Contact = new mongoose.Schema({
     "firstname": String,
@@ -69,7 +89,7 @@ var Employee = new mongoose.Schema({
 
 // checking if password is valid
 Employee.methods.validPassword = function(password) {
-    return bcrypt.compareSync(password, this.local.password);
+    return password == this.local.password;
 };
 
 module.exports.Employee = Employee;

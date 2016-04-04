@@ -29,7 +29,6 @@ db.once('open', function callback() {
 
 //set up express app
 app.use(cookieParser());
-app.use(bodyParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
@@ -38,7 +37,9 @@ app.use(methodOverride('X-HTTP-Method-Override'));
 
 //set up passport in app
 app.use(session({
-    secret: "itscuzyouredumb"
+    secret: "itscuzyouredumb",
+    resave: true,
+    saveUninitialized: true
 }));
 app.use(passport.initialize());
 app.use(passport.session());

@@ -1,45 +1,20 @@
 <md-content layout="row" layout-align="center center" class="md-padding">
-    
+
     <div flex layout="column">
-        <md-card>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">{{ tagline }}</span>
-                    <md-card-content>
-                        <p>
-                            {{ emp[0].firstname }} {{ emp[0].lastname }}
-                        </p>
-                    </md-card-content>
-                </md-card-title-text>
-            </md-card-title>
-        </md-card>
-        <md-card>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">{{ tagline }}</span>
-                    <md-card-content>
-                        <p>
-                            {{ emp[0].firstname }} {{ emp[0].lastname }}
-                        </p>
-                    </md-card-content>
-                </md-card-title-text>
-            </md-card-title>
-        </md-card>
+        <div ng-repeat="e in emp">
+            <md-card>
+                <md-card-title>
+                    <md-card-title-text>
+                        <span class="md-headline">{{ tagline }}</span>
+                        <md-card-content>
+                            <p>
+                                {{ e.firstname }} {{ e.lastname }}
+                            </p>
+                        </md-card-content>
+                    </md-card-title-text>
+                </md-card-title>
+            </md-card>
+        </div>
     </div>
-    
-    <div flex layout="column">
-        <md-card>
-            <md-card-title>
-                <md-card-title-text>
-                    <span class="md-headline">{{ tagline }}</span>
-                    <md-card-content>
-                        <p>
-                            {{ emp[0].firstname }} {{ emp[0].lastname }}
-                        </p>
-                    </md-card-content>
-                </md-card-title-text>
-            </md-card-title>
-        </md-card>
-    </div>
-    
+
 </md-content>
