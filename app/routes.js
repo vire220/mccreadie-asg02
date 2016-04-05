@@ -6,17 +6,6 @@ var Employees = mongoose.model("Employee", Schemas.Employee);
 var express = require("express");
 var router = express.Router();
 
-var validObject = function(o, keyName) {
-    var valid = true;
-    var keys = Object.keys(o);
-    if (keys.length != 1)
-        valid = false;
-    else if (keys[0] != keyName)
-        valid = false;
-
-    return valid;
-};
-
 router.route('/employees').get(function(req, resp) {
 
     Employees.find({}, function(err, data) {
@@ -239,8 +228,10 @@ router.route("/employees/:id/todo/:tid").get(function(req, resp) {
         var newTodo = JSON.parse(req.body.jsonStr);
 
         var updateObject = {};
+        
         var keys = Object.keys(newTodo);
         var validFields = "id status priority date description".split(' ');
+        
         for (var i = 0; i < keys.length; i++) {
             for (var j = 0; j < validFields.length; j++) {
                 if (keys[i] == validFields[j]) {

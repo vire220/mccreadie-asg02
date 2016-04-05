@@ -8,7 +8,7 @@ angular.module('appRoutes', []).config(['$routeProvider', '$locationProvider', f
             controller: 'MainController'
         })
 
-        // nerds page that will use the EmployeeController
+        // employees page that will use the EmployeeController
         .when('/employees', {
             templateUrl: 'views/employee.html',
             controller: 'EmployeeController'

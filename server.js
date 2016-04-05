@@ -9,10 +9,11 @@ var database = require("./config/database");
 var methodOverride = require("method-override");
 
 //login test stuff
+var morgan = require('morgan');
 var passport = require("passport");
 var cookieParser = require("cookie-parser");
 var session = require("express-session");
-var flash    = require('connect-flash');
+var flash = require('connect-flash');
 
 //create express app
 var app = express();
@@ -25,15 +26,18 @@ db.once('open', function callback() {
     console.log("Connected to MongoDB server");
 });
 
-// require('./config/passport')(passport);
+require('./config/passport')(passport);
 
 //set up express app
+app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
 app.use(methodOverride('X-HTTP-Method-Override'));
+
+app.set('view engine', 'ejs');
 
 //set up passport in app
 app.use(session({
@@ -45,25 +49,14 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(flash());
 
-//log all requests
-app.use(function(req, res, next) {
-    console.log("Request to " + req.url);
-    next();
-});
+//add api router
+app.use("/api", router);
 
 //set up routes for login
 require("./app/loginroutes")(app, passport);
 
-
-
+//set up static delivery
 app.use(express.static(__dirname + '/public'));
-app.use("/api", router);
-
-app.get('/', function(req, res) {
-    res.sendFile(__dirname + "/public/index.html");
-});
-
-
 
 app.listen(PORT, function() {
     console.log("Server listening on port " + PORT);

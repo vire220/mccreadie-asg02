@@ -89,7 +89,7 @@ var Employee = new mongoose.Schema({
 
 // checking if password is valid
 Employee.methods.validPassword = function(password) {
-    return password == this.local.password;
+    return ( password === this.password );
 };
 
 module.exports.Employee = Employee;

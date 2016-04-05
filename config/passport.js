@@ -2,7 +2,9 @@
 var LocalStrategy = require('passport-local').Strategy;
 
 // load up the employee model
-var Employee = require('../app/models/schemas').Employee;
+var Schemas = require("../app/models/schemas");
+var mongoose = require("mongoose");
+var Employee = mongoose.model("Employee", Schemas.Employee);
 
 // expose this function to our app using module.exports
 module.exports = function(passport) {
@@ -20,7 +22,9 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        Employee.findById(id, function(err, user) {
+        Employee.find({
+            'id': id
+        }, function(err, user) {
             done(err, user);
         });
     });
@@ -32,18 +36,20 @@ module.exports = function(passport) {
     // by default, if there was no name, it would just be called 'local'
 
     passport.use('local-login', new LocalStrategy({
-            // by default, local strategy uses username and password, we will override with email
-            usernameField: 'email',
+            usernameField: 'username',
             passwordField: 'password',
             passReqToCallback: true // allows us to pass back the entire request to the callback
         },
-        function(req, email, password, done) { // callback with email and password from our form
+        function(req, username, password, done) { // callback with email and password from our form
 
             // find a user whose email is the same as the forms email
             // we are checking to see if the user trying to login already exists
             Employee.findOne({
-                'local.email': email
+                'username': username
             }, function(err, user) {
+
+                console.log("user: " + user);
+                console.log("err: " + err);
                 // if there are any errors, return the error before anything else
                 if (err)
                     return done(err);

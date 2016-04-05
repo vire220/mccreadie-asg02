@@ -18,13 +18,14 @@
 
     <script src="js/controllers/MainCtrl.js"></script>
     <script src="js/controllers/EmployeeCtrl.js"></script>
+    <script src="js/controllers/LoginCtrl.js"></script>
     <script src="js/services/EmployeeService.js"></script>
     <script src="js/appRoutes.js"></script>
     <script src="js/app.js"></script>
 
 </head>
 
-<body ng-app="EmployeeApp" ng-controller="EmployeeController" ng-cloak layout="column">
+<body ng-app="EmployeeApp" ng-controller="MainController" ng-cloak layout="column">
 
     <md-toolbar layout="row">
         <h3>Assignment 02</h3>
@@ -39,6 +40,15 @@
                 </md-list-item>
                 <md-list-item>
                     <a href="/employees">Employees</a>
+                </md-list-item>
+                <md-list-item>
+                    <p>
+    <strong>id</strong>: {{ user._id }}
+    <br>
+    <strong>username</strong>: {{ user.local.username }}
+    <br>
+    <strong>password</strong>: {{ user.local.password }}
+</p>
                 </md-list-item>
             </md-list>
         </md-sidenav>
