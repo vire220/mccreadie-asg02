@@ -1,0 +1,1 @@
+mongoimport -db asg02 --collection employees --file books.json --jsonArray

@@ -1,11 +1,6 @@
-<md-content layout="row" layout-align="center center" class="md-padding">
-
-
-
-    <div flex layout="column">
-        <h1 class="md-display-1">Messages</h2>
+     <div flex layout="column">
+        <h1 class="md-display-1 md-padding">Messages</h2>
         <div ng-repeat="m in msg | orderBy:'date'">
-            <div hidden id="msgId">{{ m.id }}</div>
             <md-card layout="row" layout-align="center center">
                 <div flex="20" flex-order="1">
                     <md-card-title layout="column">
@@ -20,7 +15,7 @@
                         <p>{{ m.category }}</p>
                         <p>{{ m.date }}</p>
                         <p>{{ m.content }}</p>
-                        </md-card-content>
+                        </md-card-content>            
                 </div>
             </md-card>
 
@@ -31,5 +26,3 @@
     <div hide-gt-sm layout="row" layout-align="center center" flex>
         <md-checkbox ng-model="customFullscreen" aria-label="Fullscreen Custom Dialog">Force Custom Dialog Fullscreen</md-checkbox>
     </div>
-
-</md-content>

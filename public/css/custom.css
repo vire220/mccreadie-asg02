@@ -27,6 +27,10 @@
 }
 
 md-toolbar h3 {
-  margin-left: 20px;
-  font-weight: 500;
+    margin-left: 20px;
+    font-weight: 500;
+}
+
+.book-image {
+    padding:0.2em;
 }

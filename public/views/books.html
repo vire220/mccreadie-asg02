@@ -1,0 +1,32 @@
+<div layout="column" flex>
+    <h1 class="md-display-1 md-padding">Books</h2>
+
+    <div layout='row' class="md-padding">
+        <md-input-container>
+            <label>Search</label>
+            <input ng-model="query">
+        </md-input-container>
+
+        <md-input-container>
+            <label>Sort by</label>
+            <md-select ng-model="orderProp">
+                <md-option value="title">Title</md-option>
+                <md-option value="isbn10">ISBN</md-option>
+                <md-option value="category">Category</md-option>
+            </md-select>
+        </md-input-container>
+    </div>
+
+
+<md-list>
+    
+    <md-list-item class="md-3-line" ng-repeat="b in books | filter:query | orderBy:orderProp" ng-click="null">
+        <img ng-src="images/tinysquare/{{b.isbn10}}.jpg" class="md-avatar" alt="{{b.title}}" />
+        <div class="md-list-item-text" layout="column">
+            <h3>{{b.title}}</h3>
+            <h4>{{b.isbn10}}, {{b.category}}</h4>
+        </div>
+    </md-list-item>
+    
+</md-list>
+</div>
