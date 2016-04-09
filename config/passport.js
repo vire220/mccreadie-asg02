@@ -22,9 +22,9 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        Employee.find({
+        Employee.findOne({
             'id': id
-        }, function(err, user) {
+        },{"messages":0, "todo":0, "books":0, "__v":0}, function(err, user) {
             done(err, user);
         });
     });
@@ -46,7 +46,7 @@ module.exports = function(passport) {
             // we are checking to see if the user trying to login already exists
             Employee.findOne({
                 'username': username
-            }, function(err, user) {
+            },{"messages":0, "todo":0, "books":0, "__v":0} , function(err, user) {
 
                 console.log("user: " + user);
                 console.log("err: " + err);

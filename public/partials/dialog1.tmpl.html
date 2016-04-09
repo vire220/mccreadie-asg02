@@ -1,0 +1,24 @@
+<md-dialog aria-label="Message" ng-cloak flex="50">
+  <form>
+    <md-toolbar>
+      <div class="md-toolbar-tools">
+        <h2>University Details</h2>
+        <span flex></span>
+        <md-button class="md-icon-button" ng-click="cancel()">
+          <i class="material-icons">clear</i>
+        </md-button>
+      </div>
+    </md-toolbar>
+    <md-dialog-content>
+      <div class="md-dialog-content">
+        <h2>{{ university.name }}</h2>
+        <p>
+            {{ university.address }}<br>{{ university.city }}, {{ university.state }}<br>{{university.zip }}
+        </p>
+        <p><a href="http://{{ university.website }}">{{ university.website }}</a></p>
+        
+        <ui-gmap-google-map center='map.center' zoom='map.zoom'></ui-gmap-google-map>
+      </div>
+    </md-dialog-content>
+  </form>
+</md-dialog>

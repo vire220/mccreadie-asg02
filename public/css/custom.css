@@ -1,0 +1,32 @@
+.dialogdemoBasicUsage #popupContainer {
+    position: relative;
+}
+
+.dialogdemoBasicUsage .footer {
+    width: 100%;
+    text-align: center;
+    margin-left: 20px;
+}
+
+.dialogdemoBasicUsage .footer,
+.dialogdemoBasicUsage .footer > code {
+    font-size: 0.8em;
+    margin-top: 50px;
+}
+
+.dialogdemoBasicUsage button {
+    width: 200px;
+}
+
+.dialogdemoBasicUsage div#status {
+    color: #c60008;
+}
+
+.angular-google-map-container {
+    height: 400px;
+}
+
+md-toolbar h3 {
+  margin-left: 20px;
+  font-weight: 500;
+}

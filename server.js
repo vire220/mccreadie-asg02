@@ -52,11 +52,11 @@ app.use(flash());
 //add api router
 app.use("/api", router);
 
-//set up routes for login
-require("./app/loginroutes")(app, passport);
-
 //set up static delivery
 app.use(express.static(__dirname + '/public'));
+
+//set up routes for login
+require("./app/loginroutes")(app, passport);
 
 app.listen(PORT, function() {
     console.log("Server listening on port " + PORT);

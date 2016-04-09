@@ -4,8 +4,8 @@ module.exports = function(app, passport) {
     var path = require("path");
 
     app.get("/", isLoggedIn, function(req, res) {
-        res.locals.user = req.user;
-        res.render(path.join(__dirname, "/../public/index.ejs"), {user: req.user});
+        app.locals.user = req.user;
+        res.render(path.join(__dirname, "/../public/index.ejs"));
     });
 
     app.get('/login', function(req, res) {
@@ -32,6 +32,11 @@ module.exports = function(app, passport) {
         req.logout();
         res.redirect('/');
     });
+    
+        app.get('/*', function(req, res){
+        res.redirect("/");
+    });
+    
 };
 
 // route middleware to make sure a user is logged in

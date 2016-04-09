@@ -1,1 +1,1 @@
-angular.module('EmployeeApp', ['ngMaterial', 'ngRoute', 'appRoutes', 'MainCtrl', 'EmployeeCtrl', 'LoginCtrl', 'EmployeeService']);
+angular.module('EmployeeApp', ['ngMaterial', 'ngRoute', 'appRoutes', 'MainCtrl', 'MessageCtrl', 'LoginCtrl', 'MessageService']);
