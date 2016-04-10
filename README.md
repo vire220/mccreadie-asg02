@@ -4,6 +4,7 @@ To access API:
 Go to http://www.alex-mccreadie.me/api
 
 Employees:
+
 GET - api/employees to retrieve all employees
 GET - api/employees/:id to retrieve one employee
 
