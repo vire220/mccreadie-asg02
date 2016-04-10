@@ -1,10 +1,16 @@
-<div flex layout="column">
-    <h1 class="md-display-1 md-padding">Todo</h2>
-        <div ng-repeat="t in todos | orderBy:'date'">
-            <md-card layout="row" layout-align="start center" flex='50'>
+<md-content layout-padding>
+    <div layout="row" flex>
+
+
+
+        <div flex="60" layout="column">
+            <h1 class="md-display-1 md-padding">Todo</h2>
+        <div ng-repeat="t in todos | orderBy:dateSort:true">
+            <md-card layout="row" layout-align="start center">
                 <md-card-content flex="80">
                     <label>
-                        <span>{{ t.description }}</span>
+                        <span class="md-title">{{ t.description }}</span><br>
+                        <span class="md-caption">{{ t.date }}</span>
                         <md-chips>
                             <md-chip>{{ t.priority }}</md-chip>
                             <md-chip>{{ t.status }}</md-chip>
@@ -16,10 +22,12 @@
                 </md-card-actions>
             </md-card>
         </div>
-        
-        
-        <md-content layout-padding>
-            <md-card flex="50">
+    </div>
+    
+    
+    <div flex="40">
+    
+            <md-card class="md-padding">
                 
                 <md-card-header-text>
                     <h2 class="md-card-title md-headline">Add New Todo</h2>
@@ -57,6 +65,9 @@
             <md-button flex="none" class="md-raised md-primary" ng-click="createTodo()">Add to list</md-button>
         </form>
       </md-card>
-        </md-content>
-        
+       
+</div>
+    
+    
     </div>
+     </md-content>

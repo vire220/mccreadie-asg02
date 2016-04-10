@@ -1,6 +1,6 @@
      <div flex layout="column">
         <h1 class="md-display-1 md-padding">Messages</h2>
-        <div ng-repeat="m in msg | orderBy:'date'">
+        <div ng-repeat="m in msg | orderBy:dateSort:true">
             <md-card layout="row" layout-align="center center">
                 <div flex="20" flex-order="1">
                     <md-card-title layout="column">

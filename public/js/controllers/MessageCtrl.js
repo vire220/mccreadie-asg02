@@ -12,6 +12,10 @@ angular.module('MessageCtrl', ['ngMaterial', 'uiGmapgoogle-maps']).config(functi
     Message.get($scope.user.id).success(function(data) {
         $scope.msg = data;
     });
+    
+    $scope.dateSort = function(m){
+        return new Date(m.date);
+    };
 
     $scope.showAdvanced = function(ev, msgId) {
         var useFullScreen = ($mdMedia('sm') || $mdMedia('xs')) && $scope.customFullscreen;

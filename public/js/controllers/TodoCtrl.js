@@ -18,6 +18,10 @@ angular.module('TodoCtrl', []).controller('TodoController', function($scope, Tod
     Todo.get(userId).success(function(data) {
         $scope.todos = data;
     });
+    
+    $scope.dateSort = function(t){
+        return new Date(t.date);
+    };
 
     $scope.createTodo = function() {
 
