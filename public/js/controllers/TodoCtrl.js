@@ -22,9 +22,28 @@ angular.module('TodoCtrl', []).controller('TodoController', function($scope, Tod
     $scope.createTodo = function() {
 
         if (!$.isEmptyObject($scope.formData)) {
+
+            var d = $scope.formData.date;
+
+            var dd = d.getDate();
+            var mm = d.getMonth() + 1; //January is 0!
+
+            var yyyy = d.getFullYear();
+            if (dd < 10) {
+                dd = '0' + dd;
+            }
+            if (mm < 10) {
+                mm = '0' + mm;
+            }
+            d = mm + '/' + dd + '/' + yyyy;
+
+            $scope.formData.date = d;
+
+            console.log($scope.formData);
             Todo.create(userId, $scope.formData).success(function(data) {
                 $scope.formData = {};
-                $scope.todos = data;
+                console.log(data);
+                refreshTodo();
             });
         }
     };
@@ -37,6 +56,13 @@ angular.module('TodoCtrl', []).controller('TodoController', function($scope, Tod
                 if (data.success === true)
                     refreshTodo();
             });
+    };
+
+    $scope.updateTodo = function(id) {
+        Todo.update(userId, id).success(function(data) {
+            if (data.success === true)
+                refreshTodo();
+        });
     };
 
 });

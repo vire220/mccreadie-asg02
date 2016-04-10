@@ -1,23 +1,62 @@
 <div flex layout="column">
     <h1 class="md-display-1 md-padding">Todo</h2>
         <div ng-repeat="t in todos | orderBy:'date'">
-            <md-card layout="row" layout-align="center center">
-                <div flex>
+            <md-card layout="row" layout-align="start center" flex='50'>
+                <md-card-content flex="80">
                     <label>
-                        <input type="checkbox" ng-click="deleteTodo(t.id)">
+                        <span>{{ t.description }}</span>
+                        <md-chips>
+                            <md-chip>{{ t.priority }}</md-chip>
+                            <md-chip>{{ t.status }}</md-chip>
+                        </md-chips>
                     </label>
-                    <md-card-title layout="column">
-                        <md-card-title-text>
-                            <div class="md-list-item-text" layout="column">
-                                <h3>{{ t.date }}</h3>
-                                <h4>{{ t.priority }}, {{ t.description }}</h4>
-                            </div>
-                        </md-card-title-text>
-                    </md-card-title>
-                </div>
-                
+                </md-card-content>
+                <md-card-actions flex="20">
+                    <md-checkbox ng-click="deleteTodo(t.id)">Remove</md-checkbox>
+                </md-card-actions>
             </md-card>
-
-
         </div>
+        
+        
+        <md-content layout-padding>
+            <md-card flex="50">
+                
+                <md-card-header-text>
+                    <h2 class="md-card-title md-headline">Add New Todo</h2>
+                </md-card-header-text>
+        <form name="createForm">
+            <div layout="row">
+            
+            
+            <md-input-container class="md-block">
+                <label>Description</label>
+                <input required ng-model="formData.description" name="description">
+            </md-input-container>
+            
+            <md-input-container class="md-block">
+                <label>Priority</label>
+            <md-select required ng-model="formData.priority" name="priority">
+                <md-option value="low">Low</md-option>
+                <md-option value="medium">Medium</md-option>
+                <md-option value="high">High</md-option>
+            </md-select>
+            </md-input-container>
+            
+            <md-input-container class="md-block">
+                <label>Status</label>
+            <md-select required ng-model="formData.status" name="status">
+                <md-option value="active">Active</md-option>
+                <md-option value="pending">Pending</md-option>
+                <md-option value="completed">Completed</md-option>
+            </md-select>
+            </md-input-container>
+            
+            <md-datepicker required ng-model="formData.date" md-placeholder="Enter date" class="md-padding" name="date"></md-datepicker>
+              </div>
+              
+            <md-button flex="none" class="md-raised md-primary" ng-click="createTodo()">Add to list</md-button>
+        </form>
+      </md-card>
+        </md-content>
+        
     </div>

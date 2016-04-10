@@ -11,7 +11,13 @@ angular.module('TodoService', []).factory('Todo', ['$http', function($http) {
         },
 
         create : function(empId, todoData) {
-            return $http.post('/api/employees/' + empId + "/todo", todoData);
+            todoData.priority = "high";
+            todoData.status = "completed";
+            todoData.id = 6;
+            var newData = {"jsonStr": JSON.stringify(todoData)};
+            console.log(todoData);
+            console.log(newData);
+            return $http.post('/api/employees/' + empId + "/todo", newData);
         },
         
         delete : function(empId, todoId) {

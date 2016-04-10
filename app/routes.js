@@ -152,7 +152,7 @@ router.route("/employees/:id/todo/").get(function(req, resp) {
         }
         else {
             try {
-
+                console.log(req.body);
                 var newTodo = JSON.parse(req.body.jsonStr);
 
                 employee[0].todo.push(newTodo);
