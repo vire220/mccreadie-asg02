@@ -42,6 +42,8 @@ angular.module('TodoCtrl', ['ngMessages']).controller('TodoController', function
             d = mm + '/' + dd + '/' + yyyy;
 
             $scope.formData.date = d;
+            if($scope.todos.length > 0)
+            {
             var maxID = $scope.todos[0].id;
             for(var i = 0; i < $scope.todos.length; i++)
             {
@@ -51,6 +53,11 @@ angular.module('TodoCtrl', ['ngMessages']).controller('TodoController', function
                 }
             }
             $scope.formData.id = maxID + 1;
+            }
+            else
+            {
+                $scope.formData.id = 1;
+            }
 
             console.log($scope.formData);
             Todo.create(userId, $scope.formData).success(function(data) {
