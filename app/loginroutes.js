@@ -9,12 +9,8 @@ module.exports = function(app, passport) {
     });
 
     app.get('/login', function(req, res) {
-        var msg = req.flash().error;
-        
-        
-        console.log("Flash: " + msg);
         res.render(path.join(__dirname, "/../public/login.ejs"), {
-            message: msg
+            message: req.flash('loginMessage')
         });
     });
 

@@ -24,7 +24,12 @@ module.exports = function(passport) {
     passport.deserializeUser(function(id, done) {
         Employee.findOne({
             'id': id
-        },{"messages":0, "todo":0, "books":0, "__v":0}, function(err, user) {
+        }, {
+            "messages": 0,
+            "todo": 0,
+            "books": 0,
+            "__v": 0
+        }, function(err, user) {
             done(err, user);
         });
     });
@@ -46,22 +51,26 @@ module.exports = function(passport) {
             // we are checking to see if the user trying to login already exists
             Employee.findOne({
                 'username': username
-            },{"messages":0, "todo":0, "books":0, "__v":0} , function(err, user) {
-
-                console.log("user: " + user);
-                console.log("err: " + err);
+            }, {
+                "messages": 0,
+                "todo": 0,
+                "books": 0,
+                "__v": 0
+            }, function(err, user) {
                 // if there are any errors, return the error before anything else
                 if (err)
                     return done(err);
 
                 // if no user is found, return the message
-                if (!user)
-                    return done(null, false, req.flash('loginMessage', 'No user found.')); // req.flash is the way to set flashdata using connect-flash
-
+                if (!user) {
+                    req.flash('loginMessage', 'No user found.');
+                    return done(null, false, req); // req.flash is the way to set flashdata using connect-flash
+                }
                 // if the user is found but the password is wrong
-                if (!user.validPassword(password))
-                    return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.')); // create the loginMessage and save it to session as flashdata
-
+                if (!user.validPassword(password)){
+                    req.flash('loginMessage', 'Password is invalid.');
+                    return done(null, false, req); // req.flash is the way to set flashdata using connect-flash
+                }
                 // all is well, return successful user
                 return done(null, user);
             });

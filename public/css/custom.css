@@ -34,3 +34,8 @@ md-toolbar h3 {
 .book-image {
     padding: 0.2em;
 }
+
+#flash-message{
+    width: 500px;
+    height: 20px;
+}
