@@ -1,73 +1,107 @@
 <md-content layout-padding>
     <div layout="row" flex>
-
-
-
         <div flex="60" layout="column">
             <h1 class="md-display-1 md-padding">Todo</h2>
-        <div ng-repeat="t in todos | orderBy:dateSort:true">
-            <md-card layout="row" layout-align="start center">
-                <md-card-content flex="80">
-                    <label>
-                        <span class="md-title">{{ t.description }}</span><br>
-                        <span class="md-caption">{{ t.date }}</span>
-                        <md-chips>
-                            <md-chip>{{ t.priority }}</md-chip>
-                            <md-chip>{{ t.status }}</md-chip>
-                        </md-chips>
-                    </label>
-                </md-card-content>
-                <md-card-actions flex="20">
-                    <md-checkbox ng-click="deleteTodo(t.id)">Remove</md-checkbox>
-                </md-card-actions>
-            </md-card>
+            <div ng-repeat="t in todos | orderBy:dateSort:true">
+                <md-card layout="row" layout-align="start center">
+                    <md-card-content flex="80">
+                        <label>
+                            <span class="md-title">{{ t.description }}</span><br>
+                            <span class="md-caption">{{ t.date }}</span>
+                          
+                            <md-menu>
+                                <md-button ng-click="$mdOpenMenu($event)" class="md-raised">
+                                    {{ t.priority }}
+                                </md-button>
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-click='updateTodo(t.id, t.status, "high")'>High</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click='updateTodo(t.id, t.status, "medium")'>Medium</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click='updateTodo(t.id, t.status, "low")'>Low</md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                            
+                            <md-menu>
+                                <md-button ng-click="$mdOpenMenu($event)" class="md-raised">
+                                    {{ t.status }}
+                                </md-button>
+                                <md-menu-content>
+                                    <md-menu-item>
+                                        <md-button ng-click='updateTodo(t.id, "active", t.priority)'>Active</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click='updateTodo(t.id, "pending", t.priority)'>Pending</md-button>
+                                    </md-menu-item>
+                                    <md-menu-item>
+                                        <md-button ng-click='updateTodo(t.id, "completed", t.priority)'>Completed</md-button>
+                                    </md-menu-item>
+                                </md-menu-content>
+                            </md-menu>
+                          
+                        </label>
+                    </md-card-content>
+                    <md-card-actions flex="20">
+                        <md-checkbox ng-click="deleteTodo(t.id)">Remove</md-checkbox>
+                    </md-card-actions>
+                </md-card>
+            </div>
         </div>
-    </div>
-    
-    
-    <div flex="40">
-    
+        
+        <div flex="40">
             <md-card class="md-padding">
-                
                 <md-card-header-text>
                     <h2 class="md-card-title md-headline">Add New Todo</h2>
                 </md-card-header-text>
-        <form name="createForm">
-            <div layout="row">
-            
-            
-            <md-input-container class="md-block">
-                <label>Description</label>
-                <input required ng-model="formData.description" name="description">
-            </md-input-container>
-            
-            <md-input-container class="md-block">
-                <label>Priority</label>
-            <md-select required ng-model="formData.priority" name="priority">
-                <md-option value="low">Low</md-option>
-                <md-option value="medium">Medium</md-option>
-                <md-option value="high">High</md-option>
-            </md-select>
-            </md-input-container>
-            
-            <md-input-container class="md-block">
-                <label>Status</label>
-            <md-select required ng-model="formData.status" name="status">
-                <md-option value="active">Active</md-option>
-                <md-option value="pending">Pending</md-option>
-                <md-option value="completed">Completed</md-option>
-            </md-select>
-            </md-input-container>
-            
-            <md-datepicker required ng-model="formData.date" md-placeholder="Enter date" class="md-padding" name="date"></md-datepicker>
-              </div>
-              
-            <md-button flex="none" class="md-raised md-primary" ng-click="createTodo()">Add to list</md-button>
-        </form>
-      </md-card>
-       
-</div>
-    
-    
+                <form name="createForm">
+                    <div layout="row">
+                        <div>
+                            <md-input-container class="md-block">
+                                <label>Description</label>
+                                <input required ng-model="formData.description" name="description">
+                                <div ng-messages="createForm.description.$error">
+                                    <div ng-message="required">This is required.</div>
+                                </div>
+                            </md-input-container>
+                    
+                            <md-input-container class="md-block">
+                                <label>Priority</label>
+                                <md-select required ng-model="formData.priority" name="priority">
+                                    <md-option value="low">Low</md-option>
+                                    <md-option value="medium">Medium</md-option>
+                                    <md-option value="high">High</md-option>
+                                </md-select>
+                                <div ng-messages="createForm.priority.$error">
+                                    <div ng-message="required">This is required.</div>
+                                </div>
+                            </md-input-container>
+                        </div>
+                    
+                        <div>
+                            <md-input-container class="md-block">
+                                <label>Status</label>
+                                <md-select required ng-model="formData.status" name="status">
+                                    <md-option value="active">Active</md-option>
+                                    <md-option value="pending">Pending</md-option>
+                                    <md-option value="completed">Completed</md-option>
+                                </md-select>
+                                <div ng-messages="createForm.status.$error">
+                                    <div ng-message="required">This is required.</div>
+                                </div>
+                            </md-input-container>
+                        
+                            <md-datepicker required ng-model="formData.date" md-placeholder="Enter date" class="md-padding" name="date"></md-datepicker>
+                        </div>
+                    </div>
+                    <div>
+                        <md-button flex="none" class="md-raised md-primary" ng-click="createTodo()">Add to list</md-button>
+                    </div>
+                </form>
+            </md-card>
+        </div>
     </div>
-     </md-content>
+</md-content>

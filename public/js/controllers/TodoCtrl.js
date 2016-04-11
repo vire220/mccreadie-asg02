@@ -1,4 +1,4 @@
-angular.module('TodoCtrl', []).controller('TodoController', function($scope, Todo) {
+angular.module('TodoCtrl', ['ngMessages']).controller('TodoController', function($scope, Todo) {
 
     $scope.tagline = 'Todo Controller Test';
     $scope.user = window.u;
@@ -18,8 +18,8 @@ angular.module('TodoCtrl', []).controller('TodoController', function($scope, Tod
     Todo.get(userId).success(function(data) {
         $scope.todos = data;
     });
-    
-    $scope.dateSort = function(t){
+
+    $scope.dateSort = function(t) {
         return new Date(t.date);
     };
 
@@ -42,6 +42,7 @@ angular.module('TodoCtrl', []).controller('TodoController', function($scope, Tod
             d = mm + '/' + dd + '/' + yyyy;
 
             $scope.formData.date = d;
+            $scope.formData.id = $scope.todos.length + 1;
 
             console.log($scope.formData);
             Todo.create(userId, $scope.formData).success(function(data) {
@@ -50,6 +51,18 @@ angular.module('TodoCtrl', []).controller('TodoController', function($scope, Tod
                 refreshTodo();
             });
         }
+    };
+
+    $scope.updateTodo = function(tid, updateStatus, updatePriority) {
+
+        var newTodo = {
+            "status": updateStatus,
+            "priority": updatePriority
+        };
+        Todo.update(userId, tid, newTodo).success(function(data) {
+            refreshTodo();
+        });
+
     };
 
     $scope.deleteTodo = function(id) {
@@ -62,11 +75,6 @@ angular.module('TodoCtrl', []).controller('TodoController', function($scope, Tod
             });
     };
 
-    $scope.updateTodo = function(id) {
-        Todo.update(userId, id).success(function(data) {
-            if (data.success === true)
-                refreshTodo();
-        });
-    };
+    
 
 });
