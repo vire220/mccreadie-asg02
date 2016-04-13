@@ -42,20 +42,16 @@ angular.module('TodoCtrl', ['ngMessages']).controller('TodoController', function
             d = mm + '/' + dd + '/' + yyyy;
 
             $scope.formData.date = d;
-            if($scope.todos.length > 0)
-            {
-            var maxID = $scope.todos[0].id;
-            for(var i = 0; i < $scope.todos.length; i++)
-            {
-                if($scope.todos[i].id > maxID)
-                {
-                    maxID = $scope.todos[i].id;
+            if ($scope.todos.length > 0) {
+                var maxID = $scope.todos[0].id;
+                for (var i = 0; i < $scope.todos.length; i++) {
+                    if ($scope.todos[i].id > maxID) {
+                        maxID = $scope.todos[i].id;
+                    }
                 }
+                $scope.formData.id = maxID + 1;
             }
-            $scope.formData.id = maxID + 1;
-            }
-            else
-            {
+            else {
                 $scope.formData.id = 1;
             }
 
@@ -81,15 +77,12 @@ angular.module('TodoCtrl', ['ngMessages']).controller('TodoController', function
     };
 
     $scope.deleteTodo = function(id) {
-        Todo.delete(userId, id)
-            // if successful creation, call our get function to get all the new todos
-            .success(function(data) {
-
-                if (data.success === true)
-                    refreshTodo();
-            });
+        Todo.delete(userId, id).success(function(data) {
+            if (data.success === true)
+                refreshTodo();
+        });
     };
 
-    
+
 
 });

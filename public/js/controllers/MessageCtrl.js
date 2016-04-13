@@ -1,7 +1,7 @@
 angular.module('MessageCtrl', ['ngMaterial', 'uiGmapgoogle-maps']).config(function(uiGmapGoogleMapApiProvider) {
     uiGmapGoogleMapApiProvider.configure({
         key: 'AIzaSyAUg_E_UWYP6-A44kJZJTT6e3jcbAz1NfY',
-        v: '3.24', //defaults to latest 3.X anyhow
+        v: '3.24',
         libraries: 'weather,geometry,visualization'
     });
 }).controller('MessageController', function($scope, $mdDialog, $mdMedia, Message) {
@@ -75,8 +75,5 @@ function DialogController($scope, $mdDialog, Message, msgId, id, uiGmapGoogleMap
     };
     $scope.cancel = function() {
         $mdDialog.cancel();
-    };
-    $scope.answer = function(answer) {
-        $mdDialog.hide(answer);
     };
 }

@@ -8,13 +8,11 @@ angular.module('TodoService', []).factory('Todo', ['$http', function($http) {
         
         update : function(empId, todoId, todoData){
             var newData = {"jsonStr": JSON.stringify(todoData)};
-            console.log(newData);
             return $http.put('/api/employees/' + empId + '/todo/' + todoId, newData);    
         },
 
         create : function(empId, todoData) {
             var newData = {"jsonStr": JSON.stringify(todoData)};
-            console.log(newData);
             return $http.post('/api/employees/' + empId + "/todo", newData);
         },
         

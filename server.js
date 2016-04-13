@@ -28,8 +28,10 @@ db.once('open', function callback() {
 
 require('./config/passport')(passport);
 
+// log every request to the console
+app.use(morgan('dev')); 
+
 //set up express app
-app.use(morgan('dev')); // log every request to the console
 app.use(cookieParser());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

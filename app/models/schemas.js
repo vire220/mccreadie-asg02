@@ -1,6 +1,7 @@
 var mongoose = require('mongoose');
 
 var priorityStates = "low medium high".split(' ');
+var statusStates = "active pending completed".split(' ');
 
 var Todo = new mongoose.Schema({
     "id": {
@@ -11,7 +12,8 @@ var Todo = new mongoose.Schema({
     },
     "status": {
         type: String,
-        required: true
+        required: true,
+        enum: statusStates
     },
     "priority": {
         type: String,
@@ -56,22 +58,11 @@ var Contact = new mongoose.Schema({
 });
 
 var Message = new mongoose.Schema({
-    "id": {
-        type: Number,
-        trim: true,
-        unique: true,
-        required: true
-    },
+    "id": Number,
     "contact": Contact,
     "date": String,
-    "category": {
-        type: String,
-        required: true
-    },
-    "content": {
-        type: String,
-        required: true
-    }
+    "category": String,
+    "content": String
 });
 
 var Employee = new mongoose.Schema({
@@ -87,9 +78,8 @@ var Employee = new mongoose.Schema({
     "books": [Book]
 });
 
-// checking if password is valid
 Employee.methods.validPassword = function(password) {
-    return ( password === this.password );
+    return (password === this.password);
 };
 
 module.exports.Employee = Employee;

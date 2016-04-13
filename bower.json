@@ -4,6 +4,7 @@
   "dependencies": {
     "angular": "latest",
     "angular-route": "latest",
-    "angular-material": "latest"
+    "angular-material": "latest",
+    "angular-google-maps": "latest"
   }
 }

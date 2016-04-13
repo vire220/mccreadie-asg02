@@ -10,13 +10,11 @@ router.route('/employees').get(function(req, resp) {
 
     Employees.find({}, function(err, data) {
         if (err) {
-            console.log('error finding all employees');
             resp.json({
-                message: 'Unable to connect to employees'
+                message: err.message
             });
         }
         else {
-            // return found data as json back to request
             resp.json(data);
         }
     }).select("-_id -books -todo -messages");
@@ -26,9 +24,8 @@ router.route("/employees/:id").get(function(req, resp) {
 
     Employees.find({}, function(err, data) {
         if (err) {
-            console.log('error finding employes');
             resp.json({
-                message: 'Unable to connect to employees'
+                message: err.message
             });
         }
         else {
@@ -59,13 +56,11 @@ router.get("/employees/:id/books/", function(req, resp) {
 
     ], function(err, data) {
         if (err) {
-            console.log('error finding employes');
             resp.json({
-                message: 'Unable to connect to employees'
+                message: err.message
             });
         }
         else {
-            // return found data as json back to request
             resp.json(data);
         }
     });
@@ -99,9 +94,8 @@ router.get("/employees/:id/books/:bid", function(req, resp) {
         ],
         function(err, data) {
             if (err) {
-                console.log('error finding employes');
                 resp.json({
-                    message: 'Unable to connect to employees'
+                    message: err.message
                 });
             }
             else {
@@ -132,13 +126,11 @@ router.route("/employees/:id/todo/").get(function(req, resp) {
 
     ], function(err, data) {
         if (err) {
-            console.log('error finding employes');
             resp.json({
-                message: 'Unable to connect to employees'
+                message: err.message
             });
         }
         else {
-            // return found data as json back to request
             resp.json(data);
         }
     });
@@ -211,13 +203,11 @@ router.route("/employees/:id/todo/:tid").get(function(req, resp) {
 
     ], function(err, data) {
         if (err) {
-            console.log('error finding employes');
             resp.json({
-                message: 'Unable to connect to employees'
+                message: err.message
             });
         }
         else {
-            // return found data as json back to request
             resp.json(data);
         }
     });
@@ -263,64 +253,6 @@ router.route("/employees/:id/todo/:tid").get(function(req, resp) {
                 });
             }
         });
-
-        //   Employees.aggregate([{
-        //         $match: {
-        //             id: Number(req.params.id)
-        //         }
-        //     }, {
-        //         $unwind: "$todo"
-        //     }, {
-        //         $match: {
-        //             "todo.id": Number(req.params.tid)
-        //         }
-        //     }, {
-        //         $project: {
-        //             _id: 0,
-        //             "id": "$todo.id",
-        //             "status": "$todo.status",
-        //             "priority": "$todo.priority",
-        //             "date": "$todo.date",
-        //             "description": "$todo.description"
-        //         }
-        //     }, {
-        //         $limit: 1
-        //     }], function(err, emp) {
-        //         if (err) {
-        //             console.log('error finding todo');
-        //             res.json({
-        //                 message: 'Unable to connect to employees'
-        //             });
-        //         }
-        //         else {
-        //             console.log(emp);
-        //             delete newTodo.id;
-        //             var keys = Object.keys(newTodo);
-        //             var e = emp[0];
-
-        //             for (var i = 0; i < keys.length; i++) {
-        //                 if (keys[i] in e)
-        //                     e[keys[i]] = newTodo[keys[i]];
-        //             }
-
-        //             e.save(function(err) {
-        //                 if (err) {
-        //                     var msg = "Error updating todo: " + err.message;
-        //                     console.log(msg);
-        //                     res.json({
-        //                         "success": false,
-        //                         "errorMessage": msg
-        //                     });
-        //                 }
-        //                 else {
-        //                     console.log('Success updating todo!');
-        //                     res.json({
-        //                         "success": true
-        //                     });
-        //                 }
-        //             });
-        //         }
-        //     });
     }
     catch (e) {
         console.log(e);
@@ -329,7 +261,6 @@ router.route("/employees/:id/todo/:tid").get(function(req, resp) {
             "errorMessage": e.message
         });
     }
-
 }).delete(function(req, res) {
     Employees.update({
         id: Number(req.params.id)
@@ -378,13 +309,11 @@ router.route("/employees/:id/messages/").get(function(req, resp) {
 
     ], function(err, data) {
         if (err) {
-            console.log('error finding employes');
             resp.json({
-                message: 'Unable to connect to employees'
+                message: err.message
             });
         }
         else {
-            // return found data as json back to request
             resp.json(data);
         }
     });
@@ -417,13 +346,11 @@ router.get("/employees/:id/messages/:mid", function(req, resp) {
 
     ], function(err, data) {
         if (err) {
-            console.log('error finding employes');
             resp.json({
-                message: 'Unable to connect to employees'
+                message: err.message
             });
         }
         else {
-            // return found data as json back to request
             resp.json(data);
         }
     });
