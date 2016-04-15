@@ -58,6 +58,8 @@ angular.module('TodoCtrl', ['ngMessages']).controller('TodoController', function
             console.log($scope.formData);
             Todo.create(userId, $scope.formData).success(function(data) {
                 $scope.formData = {};
+                $scope.createForm.$setPristine();
+                $scope.createForm.$setUntouched();
                 console.log(data);
                 refreshTodo();
             });

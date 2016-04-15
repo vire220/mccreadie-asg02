@@ -19,9 +19,14 @@
     </md-toolbar>
 
     <div flex layout="row">
-
         <md-sidenav md-is-locked-open="true" class="md-whiteframe-z2">
             <md-list flex>
+                <md-list-item class="md-2-line">
+                    <div class="md-list-item-text" layout="column">
+                        <h3>{{ user.firstname }} {{ user.lastname }}</h3>
+                        <h4>ID: {{ user.id }}</h4>
+                    </div>
+                </md-list-item>
                 <md-list-item>
                     <p><a href="/">Home</a></p>
                 </md-list-item>
@@ -39,17 +44,9 @@
                 </md-list-item>
             </md-list>
         </md-sidenav>
-
         <md-content flex id="content">
-
             <div ng-view></div>
-
-
         </md-content>
-
-
     </div>
-
 </body>
-
 </html>
