@@ -1,4 +1,4 @@
-const PORT = 80;
+const PORT = 8080;
 
 //get required modules
 var express = require("express");
